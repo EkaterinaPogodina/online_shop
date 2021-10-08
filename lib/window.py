@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QLabel,  QMainWindow, QPushButton
 
 class ShopWindow(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, data=None):
         super().__init__()
 
         self.setWindowTitle('Интернет-магазин')
@@ -12,8 +12,11 @@ class ShopWindow(QMainWindow):
         self.button = QPushButton('Товар 1', self)
         self.button.setGeometry(200, 150, 200, 80)
 
-        with open('data/data.yml', 'r') as file:
-            self.data = yaml.safe_load(file)
+        if data is not None:
+            self.data = data
+        else:
+            with open('data/data.yml', 'r') as file:
+                self.data = yaml.safe_load(file)
 
         print('Our data', self.data)
 
@@ -29,7 +32,6 @@ class ShopWindow(QMainWindow):
         self.resize(1000, 300)
 
     def on_click(self):
-        print('HELLO')
         self.data[1] -= 1
 
         print('Our data', self.data)
