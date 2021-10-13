@@ -1,5 +1,6 @@
 import yaml
 from PyQt5.QtWidgets import QLabel,  QMainWindow, QPushButton
+import requests
 
 
 class ShopWindow(QMainWindow):
@@ -11,6 +12,10 @@ class ShopWindow(QMainWindow):
 
         self.button = QPushButton('Товар 1', self)
         self.button.setGeometry(200, 150, 200, 80)
+
+        # считываем данные с сервера (по-хорошему, их надо считывать раз в сколько-то секунд)
+        # это псевдокод
+        data_stats = requests.get('http://127.0.0.1:8080/api/stats')
 
         if data is not None:
             self.data = data
@@ -32,6 +37,8 @@ class ShopWindow(QMainWindow):
         self.resize(1000, 300)
 
     def on_click(self):
+        requests.post('http://127.0.0.1:8080/api/reserve')
+        # посылаем данные на сервер
         self.data[1] -= 1
 
         print('Our data', self.data)

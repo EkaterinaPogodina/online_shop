@@ -2,7 +2,8 @@ from flask import Flask, make_response, request
 
 app = Flask(__name__)
 
-data = {1: 100}
+# это должно быть в конфигурационном файле
+data = {1: 100, 2:200}
 users = {}
 
 
